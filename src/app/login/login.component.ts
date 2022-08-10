@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
+import { HeaderComponent } from '../header/header.component';
 import { AuthService } from '../services/auth.service';
 import { ILogin } from './login';
 
@@ -11,9 +13,11 @@ export class LoginComponent implements OnInit {
 
   user: ILogin;
   authService : AuthService;
+  appComponent : AppComponent;
 
-  constructor(authService : AuthService) { 
+  constructor(authService : AuthService, appComponent : AppComponent) { 
     this.authService = authService;
+    this.appComponent = appComponent;
     this.user = {
       username: "",
       password: ""
@@ -32,7 +36,7 @@ export class LoginComponent implements OnInit {
         _this.authService.setSession(response.body + "");
       }
       else {
-        console.log(response.statusText + response.json);
+        _this.appComponent.showErrorMessage("Usuario y/o constraseña incorrectos");
       }
     
     })
