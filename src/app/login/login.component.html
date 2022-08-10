@@ -1,20 +1,17 @@
-<div class="login" *ngIf="user">
-    <form class="custom-form" method="post">
-      <h1>Login</h1>
-      <input
-        type="text"
-        [(ngModel)]='user.username'
-        name="usuario"
-        placeholder="Usuario"
-        required="required"
-      />
-      <input
-        [(ngModel)]='user.password'
-        type="password"
-        name="password"
-        placeholder="Password"
-        required="required"
-      />
-      <button type="submit" (click)="login()">Log in</button>
+<div class="row">
+  <div class="col"></div>
+  <div class="col">
+    <form>
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuario</label>
+        <input type="text" [(ngModel)]='user.username' class="form-control" id="username" aria-describedby="Usuario" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" [(ngModel)]='user.password' class="form-control" id="password" />
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="login()">Iniciar sesión</button>
     </form>
   </div>
+  <div class="col"></div>
+</div>
