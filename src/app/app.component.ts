@@ -11,6 +11,7 @@ export class AppComponent {
   ALERT_SUCCESS : string = "alert-success";
   message : string = "";
   messageClass : string = "";
+  currentUser : string = ""
 
 
   showSuccessMessage(message : string) {
