@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ICurrentUser } from './login/current-user';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,20 @@ export class AppComponent {
   ALERT_SUCCESS : string = "alert-success";
   message : string = "";
   messageClass : string = "";
-  currentUser : string = ""
+  currentUser : ICurrentUser;
+  authService : AuthService;
+
+  constructor(authService : AuthService){
+    this.authService = authService;
+    this.currentUser = {
+      iss: '',
+      email: '',
+      username: '',
+      role: '',
+      exp: '',
+      iat: ''
+    }
+  }
 
 
   showSuccessMessage(message : string) {
@@ -22,5 +37,10 @@ export class AppComponent {
   showErrorMessage(message : string) {
     this.messageClass = this.ALERT_DANGER;
     this.message = message;
+  }
+
+  setCurrentUser(){
+    var _this = this;
+    this.authService.currentUser().then(response => _this.currentUser = response);
   }
 }

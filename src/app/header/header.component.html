@@ -13,10 +13,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
+                <li class="nav-item" *ngIf = "!appComponent.currentUser">
+                    <a class="nav-link" [routerLink]="['/login']">Iniciar sesión</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf = "appComponent.currentUser.username">
                 <li ngbDropdown class="nav-item dropdown">
-                    <a ngbDropdownToggle class="nav-link dropdown-toggle" href="#" role="button"
+                    <a ngbDropdownToggle class="nav-link dropdown-toggle" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        {{appComponent.currentUser.username}}
                     </a>
                     <ul ngbDropdownMenu class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Action</a></li>
@@ -26,15 +31,8 @@
                         </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </li>
-                <li class="nav-item" *ngIf = "!appComponent.currentUser">
-                    <a class="nav-link" [routerLink]="['/login']">Iniciar sesión</a>
-                </li>
+                </li>            
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
         </div>
     </div>
 </nav>

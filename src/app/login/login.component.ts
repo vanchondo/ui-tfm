@@ -33,12 +33,14 @@ export class LoginComponent implements OnInit {
   login() {
     var _this = this;
     this.authService.login(this.user).then(function (response) {
-      if (response.status === 200) {
-        _this.authService.setSession(response.body + "");
+      if (!response.error) {
+        _this.authService.setSession(response.token);
+        _this.appComponent.setCurrentUser();
         _this.router.navigate(['/']);
       }
       else {
         _this.appComponent.showErrorMessage("Usuario y/o constraseña incorrectos");
+        _this.authService.removeSession();
       }
     
     })
