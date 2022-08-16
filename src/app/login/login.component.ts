@@ -29,8 +29,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     var _this = this;
-    console.log(this.user.username);
-    console.log(this.user.password);
     this.authService.login(this.user).then(function (response) {
       if (response.status === 200) {
         _this.authService.setSession(response.body + "");
