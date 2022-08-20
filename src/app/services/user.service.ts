@@ -9,9 +9,19 @@ import { IRegister } from '../register/register';
 })
 export class UserService {
 
+  USERS_URL: string = Constants.API_URL + "users/"
+
   constructor(private httpClient: HttpClient) { }
 
   register(user: IRegister) : Observable<any> {
     return this.httpClient.post(Constants.API_URL + "register", user);
+  }
+
+  checkEmailAvailability(email: string) : Observable<any> {
+    return this.httpClient.get(this.USERS_URL + "available?email=" + email);
+  }
+
+  checkUsernameAvailability(username: string) : Observable<any> {
+    return this.httpClient.get(this.USERS_URL + "available?username=" + username);
   }
 }

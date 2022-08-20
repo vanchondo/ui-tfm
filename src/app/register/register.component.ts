@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppComponent } from '../app.component';
+import { Constants } from '../app.constants';
 import { UserService } from '../services/user.service';
 import { IRegister } from './register';
 
@@ -11,40 +12,34 @@ import { IRegister } from './register';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user : IRegister;
-  password2 : string;
-  userService : UserService;
-  appComponent: AppComponent;
-  router: Router;
+  user : IRegister = {
+    username: "",
+    password: "",
+    email: ""
+  };
+  password2 : string = "";
+  emailClass: string ="";
+  usernameClass: string ="";
+  passwordClass: string ="";
 
-  constructor(userService: UserService, appComponent: AppComponent, router: Router) { 
-    this.password2 = "";
-    this.user = {
-      username: "",
-      password: "",
-      email: ""
-    }
-    this.userService = userService;
-    this.appComponent = appComponent;
-    this.router = router;
-  }
+  constructor(private userService: UserService, private appComponent: AppComponent, private router: Router) {  }
 
   ngOnInit(): void {
 
   }
 
   isFormValid() {
-    return (this.user.email 
-      && this.user.username
-      && this.user.password
-      && this.password2 === this.user.password)
+    return this.validateEmail(this.user.email) 
+      && this.validateUsername(this.user.username)
+      && this.password2 === this.user.password
+      && this.validatePassword(this.user.password);
   }
 
   register() {
     var _this = this;
     if (this.user.password === this.password2){
       this.userService.register(this.user).subscribe({
-        next: (res) => {
+        next: () => {
           _this.appComponent.showSuccessMessage("Usuario creado correctamente");
           _this.router.navigate(['/login']);
         },
@@ -60,6 +55,49 @@ export class RegisterComponent implements OnInit {
     else {
       _this.appComponent.showErrorMessage("Las contraseñas no coinciden");
     }
+  }
+
+  checkEmailAvailability() {
+    if (this.validateEmail(this.user.email)){
+      this.userService.checkEmailAvailability(this.user.email).subscribe({
+        next: () => this.emailClass = Constants.FIELD_VALID_CLASS,
+        error: () => this.emailClass = Constants.FIELD_INVALID_CLASS 
+      });
+    }
+  }
+
+  checkUsernameAvailability() {
+    if (this.validateUsername(this.user.username)){
+      this.userService.checkUsernameAvailability(this.user.username).subscribe({
+        next: () => this.usernameClass = Constants.FIELD_VALID_CLASS,
+        error: () => this.usernameClass = Constants.FIELD_INVALID_CLASS 
+      });
+    }
+  }
+
+  checkPassword() {
+    if (this.password2 === this.user.password && this.validatePassword(this.user.password)){
+      this.passwordClass = Constants.FIELD_VALID_CLASS;
+    }
+    else {
+      this.passwordClass = Constants.FIELD_INVALID_CLASS;
+    }
+  }
+
+  validateEmail(email: string) {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  validateUsername(username: string){
+    return username.length > 5 && username.length < 26;
+  }
+
+  validatePassword(password: string){
+    return password.length > 5 && password.length < 51;
   }
 
 }

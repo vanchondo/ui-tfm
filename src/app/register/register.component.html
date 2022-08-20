@@ -4,19 +4,28 @@
       <form (ngSubmit)="register()">
         <div class="mb-3">
           <label for="email" class="form-label">E-mail</label>
-          <input type="email" [(ngModel)]='user.email' class="form-control" id="email" aria-describedby="E-mail" name="email"/>
+          <input type="email" [(ngModel)]='user.email' (ngModelChange)="checkEmailAvailability()" class="form-control {{emailClass}}" id="email" aria-describedby="E-mail" name="email" required/>
+          <div class="invalid-feedback">
+            E-mail no disponible
+          </div>
         </div>
         <div class="mb-3">
           <label for="username" class="form-label">Usuario</label>
-          <input type="text" [(ngModel)]='user.username' class="form-control" id="username" aria-describedby="Usuario" name="username"/>
+          <input type="text" [(ngModel)]='user.username' (ngModelChange)="checkUsernameAvailability()" class="form-control {{usernameClass}}" id="username" aria-describedby="Usuario" name="username"/>
+          <div class="invalid-feedback">
+            Usuario no disponible
+          </div>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Contraseña</label>
-          <input type="password" [(ngModel)]='user.password' class="form-control" id="password" name="password"/>
+          <input type="password" [(ngModel)]='user.password' (ngModelChange)="checkPassword()" class="form-control {{passwordClass}}" id="password" name="password"/>
+          <div class="invalid-feedback">
+            Constraseña no válida
+          </div>
         </div>
         <div class="mb-3">
             <label for="password2" class="form-label">Repita contraseña</label>
-            <input type="password" [(ngModel)]='password2' class="form-control" id="password2" name="password2"/>
+            <input type="password" [(ngModel)]='password2' (ngModelChange)="checkPassword()" class="form-control {{passwordClass}}" id="password2" name="password2"/>
           </div>
         <div class="row">
           <div class="col">
