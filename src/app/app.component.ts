@@ -13,20 +13,16 @@ export class AppComponent {
   ALERT_SUCCESS : string = "alert-success";
   message : string = "";
   messageClass : string = "";
-  currentUser : ICurrentUser;
-  authService : AuthService;
+  currentUser : ICurrentUser = {
+    iss: '',
+    email: '',
+    username: '',
+    role: '',
+    exp: '',
+    iat: ''
+  };
 
-  constructor(authService : AuthService){
-    this.authService = authService;
-    this.currentUser = {
-      iss: '',
-      email: '',
-      username: '',
-      role: '',
-      exp: '',
-      iat: ''
-    }
-  }
+  constructor(private authService : AuthService){ }
 
 
   showSuccessMessage(message : string) {
