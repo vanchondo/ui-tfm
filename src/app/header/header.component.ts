@@ -15,5 +15,6 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.appComponent.setCurrentUser();
   }
 }

@@ -4,6 +4,9 @@ import { Constants } from '../app.constants';
 import * as moment from "moment";
 import { ICurrentUser } from '../login/current-user';
 import { JsonPipe } from '@angular/common';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs'
+import { of } from 'rxjs';
 
 
 @Injectable({
@@ -11,7 +14,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   login(user: ILogin) {
     return fetch(Constants.API_URL + 'login', {
@@ -21,12 +24,10 @@ export class AuthService {
     }).then(response => response.json());
   }
 
-  currentUser() : Promise<ICurrentUser>{
-    var jwt = localStorage.getItem('id_token');
-    return fetch(Constants.API_URL + 'currentUser', {
-      method: 'get',
-      headers: { 'Authorization': Constants.BEARER_TOKEN + ' ' + jwt?.toString() }
-    }).then(response => response.json());
+  currentUser() : Observable<ICurrentUser>{
+    return this.httpClient
+      .get<ICurrentUser>(Constants.API_URL + 'currentUser');
+
   }
 
   setSession(jwt : string) {

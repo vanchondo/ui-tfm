@@ -41,6 +41,6 @@ export class AppComponent {
 
   setCurrentUser(){
     var _this = this;
-    this.authService.currentUser().then(response => _this.currentUser = response);
+    this.authService.currentUser().subscribe(response => _this.currentUser = response);
   }
 }
