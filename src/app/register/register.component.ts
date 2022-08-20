@@ -43,16 +43,17 @@ export class RegisterComponent implements OnInit {
   register() {
     var _this = this;
     if (this.user.password === this.password2){
-      this.userService.register(this.user).then(function (response){
-        if (response.status === 201) {
+      this.userService.register(this.user).subscribe({
+        next: (res) => {
           _this.appComponent.showSuccessMessage("Usuario creado correctamente");
-          _this.router.navigate(['/']);
-        }
-        else if (response.status === 409) {
-          _this.appComponent.showErrorMessage("Usuario/E-mail existente");
-        }
-        else {
-          _this.appComponent.showErrorMessage("Datos invalidos");
+          _this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          let errorMessage = "Datos invalidos";
+          if (err.error.messages){
+            errorMessage = err.error.messages.toString();
+          }
+          _this.appComponent.showErrorMessage(errorMessage);
         }
       })
     }

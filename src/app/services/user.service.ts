@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Constants } from '../app.constants';
 import { IRegister } from '../register/register';
 
@@ -7,13 +9,9 @@ import { IRegister } from '../register/register';
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  register(user: IRegister) {
-    return fetch(Constants.API_URL + "register", {
-      method: 'post',
-      body: JSON.stringify(user),
-      headers: {'Content-Type': 'application/json'}
-    });
+  register(user: IRegister) : Observable<any> {
+    return this.httpClient.post(Constants.API_URL + "register", user);
   }
 }

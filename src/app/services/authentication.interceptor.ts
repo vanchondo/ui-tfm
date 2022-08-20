@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Constants } from '../app.constants';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -27,12 +27,11 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       });
     }
     return next.handle(request).pipe(
-      catchError((requestError : HttpErrorResponse) => {
-        if (requestError && requestError.status === 401) {
+      catchError((err) => {
+        if (err && err.status === 401) {
           _this.router.navigate(['/login']);
-          
         }
-        return throwError(() => new Error(requestError.message));
+        return throwError(() => err);
       })
     );
   }
