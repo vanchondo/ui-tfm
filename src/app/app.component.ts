@@ -35,7 +35,19 @@ export class AppComponent {
     this.message = message;
   }
 
-  setCurrentUser(){
+  removeSession() {
+    this.authService.removeSession();
+    this.currentUser = {
+      iss: '',
+      email: '',
+      username: '',
+      role: '',
+      exp: '',
+      iat: ''
+    };
+  }
+
+  setCurrentUser() {
     var _this = this;
     this.authService.currentUser().subscribe({
       next: (response) => _this.currentUser = response});
