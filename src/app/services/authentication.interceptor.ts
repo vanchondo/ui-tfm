@@ -19,11 +19,13 @@ export class AuthenticationInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let _this = this;
     var jwt = localStorage.getItem('id_token');
-    request = request.clone({
-      setHeaders: {
-        'Authorization': Constants.BEARER_TOKEN + ' ' + jwt?.toString()
-      }
-    });
+    if (jwt){
+      request = request.clone({
+        setHeaders: {
+          'Authorization': Constants.BEARER_TOKEN + ' ' + jwt?.toString()
+        }
+      });
+    }
     return next.handle(request).pipe(
       catchError((requestError : HttpErrorResponse) => {
         if (requestError && requestError.status === 401) {
