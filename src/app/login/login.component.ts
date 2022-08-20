@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     var _this = this;
-    this.authService.login(this.user).then(function (response) {
+    this.authService.login(this.user).subscribe(function (response) {
       if (!response.error) {
         _this.authService.setSession(response.token);
         _this.appComponent.setCurrentUser();
@@ -43,9 +43,6 @@ export class LoginComponent implements OnInit {
         _this.authService.removeSession();
       }
     
-    })
-    .catch(function(error) {
-      console.error(error);
     });
   }
 

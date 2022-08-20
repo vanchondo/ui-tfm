@@ -16,12 +16,8 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) { }
 
-  login(user: ILogin) {
-    return fetch(Constants.API_URL + 'login', {
-      method: 'post',
-      body: JSON.stringify(user),
-      headers: { 'Content-Type': 'application/json' }
-    }).then(response => response.json());
+  login(user: ILogin) : Observable<any>{
+    return this.httpClient.post(Constants.API_URL + 'login', user);
   }
 
   currentUser() : Observable<ICurrentUser>{
