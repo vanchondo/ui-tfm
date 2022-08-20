@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
-import { HeaderComponent } from '../header/header.component';
 import { AuthService } from '../services/auth.service';
 import { ILogin } from './login';
 
@@ -32,17 +31,16 @@ export class LoginComponent implements OnInit {
 
   login() {
     var _this = this;
-    this.authService.login(this.user).subscribe(function (response) {
-      if (!response.error) {
-        _this.authService.setSession(response.token);
+    this.authService.login(this.user).subscribe({
+      next: (res) => {
+        _this.authService.setSession(res.token);
         _this.appComponent.setCurrentUser();
         _this.router.navigate(['/']);
-      }
-      else {
+      },
+      error: (err) => {
         _this.appComponent.showErrorMessage("Usuario y/o constraseña incorrectos");
         _this.authService.removeSession();
       }
-    
     });
   }
 
