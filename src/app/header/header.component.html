@@ -32,6 +32,11 @@
     </div>
 </nav>
 
-<div *ngIf ="appComponent.message" class="alert {{appComponent.messageClass}}" role="alert">
-    {{appComponent.message}}
+<div *ngIf="appComponent.message" class="container-fluid">
+    <div class="row">
+        <div class="alert text-center {{appComponent.messageClass}} alert-dismissible fade show" role="alert">
+            {{appComponent.message}}
+            <button type="button" class="btn-close" (click)="appComponent.hideMessage()" aria-label="Close"></button>
+        </div>
+    </div>
 </div>

@@ -35,6 +35,11 @@ export class AppComponent {
     this.message = message;
   }
 
+  hideMessage(){
+    this.messageClass = "";
+    this.message = "";
+  }
+
   removeSession() {
     this.authService.removeSession();
     this.currentUser = {
