@@ -12,6 +12,10 @@ import { RegisterComponent } from './register/register.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthenticationInterceptor } from './services/authentication.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartComponent } from './chart/chart.component';
+import { CryptoComponent } from './crypto/crypto.component';
 
 
 @NgModule({
@@ -21,14 +25,18 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HeaderComponent,
     HomeComponent,
     RegisterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ChartComponent,
+    CryptoComponent
   ],
   imports: [
     NgbModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgxChartsModule
   ],
   providers: [
     {
