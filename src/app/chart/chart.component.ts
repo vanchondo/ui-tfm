@@ -25,6 +25,7 @@ export class ChartComponent implements OnInit {
   yAxisLabel: string = 'Precio (USD)';
   timeline: boolean = true;
   autoScale: boolean = true;
+  gradient: boolean = false;
 
   colorScheme : Color = {
     domain: ['#5AA454', '#E44D25'],
@@ -48,6 +49,15 @@ export class ChartComponent implements OnInit {
 
   onDeactivate(data: any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  formatPrice(valueString: string) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    var value: number = +valueString;
+    return formatter.format(value);
   }
 
 }

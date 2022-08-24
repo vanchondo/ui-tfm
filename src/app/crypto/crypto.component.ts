@@ -41,11 +41,11 @@ export class CryptoComponent implements OnInit {
         var minSeries = new Array;
         data.forEach(function(row) {
           maxSeries.push({
-            name: row.date,
+            name: new Date(row.date),
             value: row.high
           });
           minSeries.push({
-            name: row.date,
+            name: new Date(row.date),
             value: row.low
           });
         });
@@ -58,14 +58,13 @@ export class CryptoComponent implements OnInit {
             name: "Mínimo",
             series: minSeries
           }
-        ]
+        ];
       },
       error: (error) => {
         console.error(error);
         this.appComponent.showErrorMessage("Ocurrio un error al obtener datos historicos")
       }
     });
-  }
-  
+  }  
 
 }
