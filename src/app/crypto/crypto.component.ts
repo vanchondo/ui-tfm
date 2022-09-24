@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from 'express';
 import { AppComponent } from '../app.component';
 import { CryptoService } from '../services/crypto.service';
+import { ICryptoData } from './crypto-data';
 
 @Component({
   selector: 'app-crypto',
@@ -15,6 +16,11 @@ export class CryptoComponent implements OnInit {
 
   title?: string;
   crypto?: string;
+  maxHistoricData: Array<Object> = new Array();
+  minHistoricData: Array<Object> = new Array();
+  maxPredData: Array<Object> = new Array();
+  minPredData: Array<Object> = new Array();
+  defaultValue: number = 7;
 
   constructor(private route: ActivatedRoute, private appComponent: AppComponent, private cryptoService: CryptoService) { }
 
@@ -48,58 +54,83 @@ export class CryptoComponent implements OnInit {
   }
 
   private loadHistoricalData(crypto : string): void {
+    var _this = this;
     this.cryptoService.getHistory(crypto).subscribe({
       next: (data) => {
-        var maxSeries = new Array;
-        var minSeries = new Array;
+        _this.maxHistoricData = new Array;
+        _this.minHistoricData = new Array;
         var history = data.history;
         history.forEach(function(row) {
-          maxSeries.push({
+          _this.maxHistoricData.push({
             name: new Date(row.date),
             value: row.high
           });
-          minSeries.push({
+          _this.minHistoricData.push({
             name: new Date(row.date),
             value: row.low
           });
         });
-        var predictionMaxSeries = new Array;
-        var predictionMinSeries = new Array;
+        _this.maxPredData = new Array;
+        _this.minPredData = new Array;
         var predictions = data.predictions;
         predictions.forEach(function(row) {
-          predictionMaxSeries.push({
+          _this.maxPredData.push({
             name: new Date(row.date),
             value: row.high
           });
-          predictionMinSeries.push({
+          _this.minPredData.push({
             name: new Date(row.date),
             value: row.low
           });
         });
-        this.data = [
-          {
-            name: "Máximo",
-            series: maxSeries
-          },
-          {
-            name: "Mínimo",
-            series: minSeries
-          },
-          {
-            name: "Predicción - Máximo",
-            series: predictionMaxSeries
-          },
-          {
-            name: "Predicción - Mínimo",
-            series: predictionMinSeries
-          }
-        ];
+        _this.selectLastDays(_this.defaultValue);
       },
       error: (error) => {
         console.error(error);
         this.appComponent.showErrorMessage("Ocurrio un error al obtener datos historicos")
       }
     });
-  }  
+  }
+  
+  private updateChartValues(selectedMaxHistoricData : Array<Object>, selectedMinHistoricData : Array<Object>, selectedMaxPredData : Array<Object>, selectedMinPredData : Array<Object>) : void {
+    this.data = [
+      {
+        name: "Máximo",
+        series: selectedMaxHistoricData
+      },
+      {
+        name: "Mínimo",
+        series: selectedMinHistoricData
+      },
+      {
+        name: "Predicción - Máximo",
+        series: selectedMaxPredData
+      },
+      {
+        name: "Predicción - Mínimo",
+        series: selectedMinPredData
+      }
+    ];
+  }
 
+
+  selectLastDays(days : number) : void { 
+    var _this = this;
+    var selectedLastDays = days + 1;
+    var selectedMaxHistoricData = Array();
+    var selectedMinHistoricData = Array();
+    if (_this.maxHistoricData.length < days){
+      days = _this.maxHistoricData.length;
+    }
+    for (var i = _this.maxHistoricData.length - 1; i >=  _this.maxHistoricData.length - selectedLastDays; i--) {
+      selectedMaxHistoricData.push(_this.maxHistoricData[i]);
+      selectedMinHistoricData.push(_this.minHistoricData[i]);
+    }
+    _this.updateChartValues(selectedMaxHistoricData, selectedMinHistoricData, _this.maxPredData, _this.minPredData);
+  }
+
+  selectAllData() : void {
+    var _this = this;
+    _this.updateChartValues(_this.maxHistoricData, _this.minHistoricData, _this.maxPredData, _this.minPredData);
+  }
 }

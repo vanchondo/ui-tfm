@@ -1,2 +1,29 @@
 <h1>{{title}}</h1>
+<div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <div class = "row">
+            <div class="col">
+                <a href="javascript:void(0)" (click)="selectLastDays(7)" class="link-primary">7 Días</a>
+            </div>
+            <div class="col">
+                <a href="javascript:void(0)" (click)="selectLastDays(14)" class="link-primary">14 Días</a>
+            </div>
+            <div class="col">
+                <a href="javascript:void(0)" (click)="selectLastDays(30)" class="link-primary">1 Mes</a>
+            </div>
+            <div class="col">
+                <a href="javascript:void(0)" (click)="selectLastDays(180)" class="link-primary">6 Meses</a>
+            </div>
+            <div class="col">
+                <a href="javascript:void(0)" (click)="selectLastDays(365)" class="link-primary">1 Año</a>
+            </div>
+            <div class="col">
+                <a href="javascript:void(0)" (click)="selectAllData()" class="link-primary">Todo</a>
+            </div>
+        </div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
 <app-chart *ngIf="data" [data]="data"></app-chart>

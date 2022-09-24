@@ -28,7 +28,7 @@ export class ChartComponent implements OnInit {
   gradient: boolean = false;
 
   colorScheme : Color = {
-    domain: ['#5AA454', '#E44D25'],
+    domain: ['#5AA454', '#E44D25', '#3374FF', '#FF33F6'],
     name: '',
     selectable: false,
     group: ScaleType.Linear
