@@ -30,7 +30,20 @@ export class CryptoComponent implements OnInit {
 
     switch (crypto) {
       case 'btc':
-        this.title = 'Bitcoin'
+        this.title = 'Precio Bitcoin (USD)';
+        break;
+      case 'eth':
+        this.title = 'Precio Ethereum (USD)';
+        break;
+      case 'ada':
+        this.title = 'Precio Cardano (USD)';
+        break;
+      case 'xrp':
+        this.title = 'Precio Ripple (USD)';
+        break;
+      case 'sol':
+        this.title = 'Precio Solana (USD)';
+        break;        
     }
   }
 
