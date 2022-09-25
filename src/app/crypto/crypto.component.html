@@ -65,3 +65,7 @@
   </div>
   <br />
 <app-chart *ngIf="data" [data]="data"></app-chart>
+<br/>
+<div *ngIf="legend">
+    <p [innerHtml]="legend"></p>
+</div>
