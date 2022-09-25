@@ -1,4 +1,42 @@
 <h1>{{title}}</h1>
+<div>
+    <p *ngIf="crypto=='btc'">
+        Bitcoin usa tecnología peer-to-peer o entre pares para operar sin una autoridad central o bancos; 
+        la gestión de las transacciones y la emisión de bitcoins es llevada a cabo de forma colectiva por la red. 
+        <b>Bitcoin es de código abierto; su diseño es público, nadie es dueño o controla Bitcoin y todo el mundo puede participar.</b> 
+        Por medio de sus muchas propiedades únicas, Bitcoin permite usos interesantes no contemplados por ningún sistema de pagos anterior.<br/>
+        <a href="https://bitcoin.org/" target="_blank">Mas información</a>
+    </p>
+    <p *ngIf="crypto=='eth'">
+        Ethereum es una tecnología para crear aplicaciones y organizaciones, mantener activos, realizar transacciones y comunicarse sin estar 
+        controlado por una autoridad central. No es necesario que entregue todos sus datos personales para usar Ethereum: usted mantiene el 
+        control de sus propios datos y de lo que se comparte. Ethereum tiene su propia criptomoneda, Ether, que se utiliza para pagar ciertas 
+        actividades en la red Ethereum.<br/>
+        <a href="https://ethereum.org/" target="_blank">Mas información</a>
+    </p>
+    <p *ngIf="crypto=='ada'">
+        Cardano es una red blockchain de tercera generación creada para solucionar problemas de la red de bitcoin y ethereum, de hecho, es 
+        conocida como una de las redes capaces de sustituir a la red de ethereum. En cuanto a la plataforma en sí, cabe decir que es de código 
+        abierto y ofrece una gran escalabilidad y seguridad gracias a la manera en la que está construida. A grandes rasgos, ofrece una plataforma 
+        única dentro del sistema de las criptomonedas. Es más, también se la ha calificado como la primera blockchain científica.<br/>
+        <a href="https://cardano.org/" target="_blank">Mas información</a>
+    </p>
+    <p *ngIf="crypto=='xrp'">
+        Ripple es tanto una plataforma como una moneda. La plataforma Ripple es un protocolo de código abierto que está diseñado para permitir 
+        transacciones rápidas y baratas.<br/>
+        A diferencia de Bitcoin, que nunca fue concebido como una simple máquina de pago, Ripple va a regir definitivamente todas las transacciones 
+        internacionales en todo el mundo. Bastante ambicioso, pero ¿quién sabe? Tal vez los cambios de divisas desaparecerán en unos años como lo 
+        hicieron las tiendas Blockbuster.<br/>
+        <a href="https://ripple.com/xrp/" target="_blank">Mas información</a>
+    </p>
+    <p *ngIf="crypto=='sol'">
+        Solana es un proyecto de código abierto altamente funcional que se basa en la naturaleza sin permiso de la tecnología blockchain para proporcionar 
+        soluciones financieras descentralizadas (DeFi). Si bien la idea y el trabajo inicial en el proyecto comenzaron en 2017, Solana fue lanzada 
+        oficialmente en marzo de 2020 por la Fundación Solana con sede en Ginebra, Suiza.<br/>
+        <a href="https://solana.com/" target="_blank">Mas información</a>
+    </p>
+</div>
+<h2>Precio (USD)</h2>
 <div class="container text-center">
     <div class="row">
       <div class="col">
