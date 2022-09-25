@@ -23,7 +23,7 @@ export class ChartComponent implements OnInit {
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Fecha';
   yAxisLabel: string = 'Precio (USD)';
-  timeline: boolean = true;
+  timeline: boolean = false;
   autoScale: boolean = true;
   gradient: boolean = false;
 
