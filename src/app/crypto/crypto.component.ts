@@ -24,7 +24,7 @@ export class CryptoComponent implements OnInit {
   minHistoricData: Array<IChartItem> = new Array();
   maxPredData: Array<IChartItem> = new Array();
   minPredData: Array<IChartItem> = new Array();
-  defaultValue: number = 7;
+  defaultValue: number = 14;
 
   constructor(@Inject(LOCALE_ID) public locale: string, private route: ActivatedRoute, private appComponent: AppComponent, private cryptoService: CryptoService) { }
 
@@ -116,7 +116,6 @@ export class CryptoComponent implements OnInit {
       }
     ];
   }
-
 
   selectLastDays(days : number) : void { 
     var _this = this;
