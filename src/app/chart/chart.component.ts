@@ -34,6 +34,7 @@ export class ChartComponent implements OnInit {
     group: ScaleType.Linear
   };
   constructor() { 
+    this.view = [innerWidth / 1.8, innerWidth / 3.3];
   }
 
   ngOnInit(): void {
@@ -49,6 +50,10 @@ export class ChartComponent implements OnInit {
 
   onDeactivate(data: any): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onResize(event: any) {
+    this.view = [innerWidth / 1.8, innerWidth / 3.3];
   }
 
   formatPrice(valueString: string) {
