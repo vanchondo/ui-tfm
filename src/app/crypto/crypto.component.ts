@@ -87,7 +87,7 @@ export class CryptoComponent implements OnInit {
       },
       error: (error) => {
         console.error(error);
-        this.appComponent.showErrorMessage("Ocurrio un error al obtener datos historicos")
+        this.appComponent.showErrorMessage("Ocurrio un error al obtener datos historicos");
       }
     });
   }

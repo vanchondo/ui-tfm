@@ -16,6 +16,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartComponent } from './chart/chart.component';
 import { CryptoComponent } from './crypto/crypto.component';
+import { NewsComponent } from './news/news.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CryptoComponent } from './crypto/crypto.component';
     RegisterComponent,
     PageNotFoundComponent,
     ChartComponent,
-    CryptoComponent
+    CryptoComponent,
+    NewsComponent
   ],
   imports: [
     NgbModule,

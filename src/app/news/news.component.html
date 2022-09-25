@@ -1,0 +1,14 @@
+<div class="container text-center">
+    <h2>Noticias mas recientes</h2>
+</div>
+<div class="list-group" *ngIf = "rssItems">
+    <div *ngFor="let o of rssItems;">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">{{o.title}}</h4>
+            </div>
+            <div class="panel-body" [innerHTML] = "o.description"></div>
+            <hr />
+        </div>
+    </div>
+</div>
