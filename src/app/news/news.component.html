@@ -1,14 +1,19 @@
 <div class="container text-center">
     <h2>Noticias mas recientes</h2>
+    <hr/>
 </div>
-<div class="list-group" *ngIf = "rssItems">
-    <div *ngFor="let o of rssItems;">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">{{o.title}}</h4>
-            </div>
-            <div class="panel-body" [innerHTML] = "o.description"></div>
-            <hr />
-        </div>
+
+<div class="media" *ngFor="let o of rssItems;">
+    <div class="media-left">
+        <a href="{{o.link}}">
+            <img class="media-object" src="{{o.imgUrl}}" alt="Crypto Noticias">
+        </a>
     </div>
+    <div class="media-body">
+        <h4 class="media-heading">{{o.title}}</h4>
+        {{o.description}}
+        <a href="{{o.link}}">Leer más</a>
+    </div>
+    <hr />
 </div>
+<div class="well well-sm">Fuente: <a href="https://www.criptonoticias.com/">Crypto Noticias</a></div>

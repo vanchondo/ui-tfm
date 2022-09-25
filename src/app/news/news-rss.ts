@@ -25,6 +25,7 @@ export interface NewsRss {
   }
   
   export interface IRssItem {
+    imgUrl : string;
     category: Array<string>;
     description: Array<string>;
     guid: any;
