@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartComponent } from './chart/chart.component';
 import { CryptoComponent } from './crypto/crypto.component';
 import { NewsComponent } from './news/news.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { NewsComponent } from './news/news.component';
     PageNotFoundComponent,
     ChartComponent,
     CryptoComponent,
-    NewsComponent
+    NewsComponent,
+    AboutUsComponent
   ],
   imports: [
     NgbModule,
