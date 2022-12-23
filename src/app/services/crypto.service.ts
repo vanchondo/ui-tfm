@@ -11,7 +11,7 @@ import { IRssItem } from '../news/news-rss';
 })
 export class CryptoService {
 
-  CRYPTO_URL: string = Constants.API_URL + "/crypto/"
+  CRYPTO_URL: string = Constants.API_URL + "crypto/"
 
   constructor(private httpClient: HttpClient) { }
 

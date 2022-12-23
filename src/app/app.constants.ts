@@ -1,6 +1,6 @@
 export const Constants = {
-    API_URL : 'http://remoto-tfm.victoranchondo.com',
-    // API_URL : 'http://localhost:8080',
+    API_URL : 'http://remoto-tfm.victoranchondo.com/',
+    // API_URL : 'http://localhost:8080/',
 
     BEARER_TOKEN : 'Bearer',
 
