@@ -1,12 +1,12 @@
-FROM node:16  AS build
+FROM node:18  AS build-step
 
+RUN mkdir -p /app
 WORKDIR /app
-ADD . .
-RUN npm install -g @angular/cli@14.1.1 
-RUN npm install 
-RUN ng build
-COPY . .
+COPY package.json /app
+RUN npm install
+COPY . /app/
+RUN npm i --save-dev @types/d3-shape
+RUN npm run build --prod
 
-FROM nginx:latest
-WORKDIR /app
-COPY --from=build /app/dist /usr/share/nginx/html
+FROM nginx:1.23.3
+COPY --from=build-step /app/dist /usr/share/nginx/html
