@@ -30,5 +30,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Localhost url
 http://localhost:4200
 
-## Heroku url
-https://ui-tfm.herokuapp.com/
+## Cloudflare url
+http://tfm.victoranchondo.com/
