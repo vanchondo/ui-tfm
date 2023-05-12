@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         CREDENTIALS = credentials('docker-registry-credentials')
-        app_name = 'remoto-tfm'
+        app_name = 'ui-tfm'
         version = "0.${BUILD_NUMBER}"
     }
     stages {            
