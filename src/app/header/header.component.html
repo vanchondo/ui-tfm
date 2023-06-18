@@ -23,7 +23,7 @@
                     <a class="nav-link" [routerLinkActive]="['active']" [routerLink]="['crypto/sol']">Solana</a>
                 </li>
                 <li class="nav-item" *ngIf = "!appComponent.currentUser">
-                    <a class="nav-link" [routerLink]="['/login']">Iniciar sesión</a>
+                    <a class="nav-link" [href]="LOGIN_PAGE">Iniciar sesión</a>
                 </li>
             </ul>
             <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf = "appComponent.currentUser.username">

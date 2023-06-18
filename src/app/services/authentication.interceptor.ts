@@ -7,17 +7,20 @@ import {
 } from '@angular/common/http';
 import { Constants } from '../app.constants';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, skip } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
 
-  constructor(private router : Router) {}
+  constructor(private router : Router, private route: ActivatedRoute) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let _this = this;
+
     var jwt = localStorage.getItem('id_token');
+
     if (jwt){
       request = request.clone({
         setHeaders: {
@@ -28,7 +31,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         if (err && err.status === 401) {
-          _this.router.navigate(['/login']);
+          window.location.href = Constants.SSO_URL + "?origin=" + window.location;
         }
         return throwError(() => err);
       })

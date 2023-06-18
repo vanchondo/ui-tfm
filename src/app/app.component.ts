@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ICurrentUser } from './login/current-user';
 import { AuthService } from './services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { skip, take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +11,11 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'ui-tfm';
-  ALERT_DANGER : string = "alert-danger";
-  ALERT_SUCCESS : string = "alert-success";
-  message : string = "";
-  messageClass : string = "";
-  currentUser : ICurrentUser = {
+  ALERT_DANGER: string = "alert-danger";
+  ALERT_SUCCESS: string = "alert-success";
+  message: string = "";
+  messageClass: string = "";
+  currentUser: ICurrentUser = {
     iss: '',
     email: '',
     username: '',
@@ -22,20 +24,20 @@ export class AppComponent {
     iat: ''
   };
 
-  constructor(private authService : AuthService){ }
+  constructor(private authService: AuthService, private route: ActivatedRoute, private router: Router) { }
 
 
-  showSuccessMessage(message : string) {
+  showSuccessMessage(message: string) {
     this.messageClass = this.ALERT_SUCCESS;
     this.message = message;
   }
 
-  showErrorMessage(message : string) {
+  showErrorMessage(message: string) {
     this.messageClass = this.ALERT_DANGER;
     this.message = message;
   }
 
-  hideMessage(){
+  hideMessage() {
     this.messageClass = "";
     this.message = "";
   }
@@ -54,7 +56,24 @@ export class AppComponent {
 
   setCurrentUser() {
     var _this = this;
-    this.authService.currentUser().subscribe({
-      next: (response) => _this.currentUser = response});
+    var skipCnt = localStorage.getItem('id_token') ? 0 : 1;
+
+    this.route.queryParamMap
+      .pipe(skip(skipCnt))
+      .subscribe(p => {
+        var token = p.get('token');
+        if (token) {
+          localStorage.setItem('id_token', token);
+          this.router.navigate([], {
+            queryParams: {
+              'token': null
+            },
+            queryParamsHandling: 'merge'
+          })
+        }
+        this.authService.currentUser().subscribe({
+          next: (response) => _this.currentUser = response
+        });
+      });
   }
 }
